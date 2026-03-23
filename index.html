@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR Impact Readiness | Dale Carnegie</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0E1117;
+  --ink-60: rgba(14,17,23,0.60);
+  --ink-30: rgba(14,17,23,0.30);
+  --ink-10: rgba(14,17,23,0.08);
+  --gold: #B8882A;
+  --gold-pale: #F7EFE0;
+  --gold-mid: #DDB96C;
+  --red-dc: #CC1F36;
+  --red-pale: #FBE8EB;
+  --teal: #1A5C6B;
+  --teal-pale: #E3F2F5;
+  --green: #1E6646;
+  --green-pale: #E5F3EC;
+  --amber-pale: #FDF3E0;
+  --white: #FFFFFF;
+  --surface: #FAFAF8;
+  --border: rgba(14,17,23,0.10);
+  --r: 10px;
+  --rs: 6px;
+}
+body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(--ink); min-height: 100vh; font-size: 15px; line-height: 1.65; }
+
+/* === HERO === */
+.hero { background: var(--ink); color: white; padding: 56px 24px 72px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(184,136,42,0.12) 0%, transparent 70%); pointer-events: none; }
+.eyebrow { display: inline-flex; align-items: center; gap: 6px; background: rgba(184,136,42,0.18); border: 1px solid rgba(184,136,42,0.35); border-radius: 100px; padding: 5px 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase; color: var(--gold-mid); margin-bottom: 20px; }
+.eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold-mid); }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 5.5vw, 58px); font-weight: 700; line-height: 1.10; max-width: 700px; margin: 0 auto 14px; }
+.hero h1 em { font-style: normal; color: var(--gold-mid); }
+.hero-sub { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.60); max-width: 520px; margin: 0 auto 36px; line-height: 1.70; }
+.hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.hero-stat strong { display: block; font-size: 20px; font-weight: 600; color: white; margin-bottom: 2px; }
+.hero-stat span { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+/* === CONTAINER === */
+.wrap { max-width: 840px; margin: 0 auto; padding: 0 20px; }
+
+/* === PROGRESS === */
+.progress-bar-wrap { background: white; border-bottom: 1px solid var(--border); padding: 12px 20px; position: sticky; top: 0; z-index: 100; display: none; }
+.progress-bar-wrap.on { display: block; }
+.prog-top { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 7px; }
+.prog-label { font-weight: 500; color: var(--ink); }
+.prog-count { color: var(--ink-60); }
+.prog-track { height: 3px; background: var(--ink-10); border-radius: 100px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--gold); border-radius: 100px; transition: width 0.35s ease; }
+
+/* === WELCOME === */
+#welcome { padding: 48px 0 60px; }
+.welcome-card { background: white; border-radius: 16px; border: 1px solid var(--border); padding: 44px 40px; max-width: 580px; margin: 0 auto; }
+.w-icon { width: 64px; height: 64px; background: var(--gold-pale); border: 2px solid var(--gold-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 22px; }
+.welcome-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; text-align: center; margin-bottom: 10px; }
+.welcome-card > p { font-size: 14px; color: var(--ink-60); text-align: center; line-height: 1.75; margin-bottom: 24px; }
+.feat-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.feat-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--ink); }
+.feat-check { width: 20px; height: 20px; border-radius: 50%; background: var(--green-pale); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--green); flex-shrink: 0; margin-top: 1px; }
+.note-box { background: var(--gold-pale); border-left: 3px solid var(--gold); border-radius: var(--rs); padding: 12px 14px; font-size: 12.5px; color: var(--ink-60); line-height: 1.65; margin-bottom: 24px; }
+.note-box strong { color: var(--ink); }
+.btn-start { width: 100%; padding: 15px; border-radius: 100px; background: var(--ink); color: white; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s; letter-spacing: 0.01em; }
+.btn-start:hover { background: #1e2535; transform: translateY(-1px); }
+
+/* === ASSESSMENT === */
+#assessment { display: none; }
+#assessment.on { display: block; }
+
+.cat-header { background: white; border-radius: var(--r); border: 1px solid var(--border); padding: 20px 24px; margin: 32px 0 20px; display: flex; align-items: center; gap: 16px; }
+.cat-icon-box { width: 44px; height: 44px; border-radius: var(--rs); background: var(--gold-pale); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; border: 1px solid rgba(184,136,42,0.25); }
+.cat-name { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.cat-desc-text { font-size: 12.5px; color: var(--ink-60); }
+
+.q-card { background: white; border-radius: var(--r); border: 1px solid var(--border); padding: 26px; margin-bottom: 12px; transition: box-shadow 0.2s; }
+.q-card:hover { box-shadow: 0 2px 16px rgba(14,17,23,0.08); }
+.q-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.q-text { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 18px; line-height: 1.55; }
+.q-scale { display: flex; flex-direction: column; gap: 7px; }
+.q-opt { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: var(--rs); border: 1.5px solid var(--border); cursor: pointer; font-size: 13.5px; color: var(--ink-60); transition: all 0.15s; }
+.q-opt:hover { border-color: var(--gold-mid); background: var(--gold-pale); color: var(--ink); }
+.q-opt.sel { border-color: var(--gold); background: var(--gold-pale); color: var(--ink); font-weight: 500; }
+.q-radio { width: 17px; height: 17px; border-radius: 50%; border: 2px solid #D0CBBC; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.q-opt.sel .q-radio { border-color: var(--gold); background: var(--gold); }
+.q-radio-dot { width: 6px; height: 6px; border-radius: 50%; background: white; display: none; }
+.q-opt.sel .q-radio-dot { display: block; }
+.scale-labels { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--ink-30); margin-top: 6px; padding: 0 2px; }
+
+/* === NAV === */
+.nav-row { display: flex; justify-content: space-between; align-items: center; padding: 24px 0 44px; gap: 12px; }
+.btn-nav { padding: 12px 28px; border-radius: 100px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s; letter-spacing: 0.01em; }
+.btn-back { background: transparent; color: var(--ink-60); border: 1.5px solid var(--border); }
+.btn-back:hover { color: var(--ink); border-color: var(--ink-60); }
+.btn-next { background: var(--ink); color: white; }
+.btn-next:hover { background: #1e2535; transform: translateY(-1px); }
+
+/* === RESULTS === */
+#results { display: none; }
+#results.on { display: block; }
+
+.results-hero { background: var(--ink); color: white; padding: 52px 24px 40px; text-align: center; }
+.results-hero h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+.results-hero p { color: rgba(255,255,255,0.55); font-size: 14px; margin-bottom: 28px; }
+.score-ring { display: inline-block; }
+.score-big { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 700; color: var(--gold-mid); line-height: 1; }
+.score-denom { font-size: 22px; color: rgba(255,255,255,0.35); vertical-align: super; }
+.archetype-pill { display: inline-block; margin-top: 14px; background: rgba(184,136,42,0.18); border: 1px solid rgba(184,136,42,0.35); border-radius: 100px; padding: 8px 20px; font-size: 14px; font-weight: 500; color: var(--gold-mid); }
+.archetype-sub { font-size: 13.5px; color: rgba(255,255,255,0.50); margin-top: 10px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.70; }
+
+/* === DOMAIN SCORES === */
+.domain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: -20px 0 36px; padding: 0 4px; }
+.domain-card { background: white; border-radius: var(--r); border: 1px solid var(--border); padding: 18px 16px; text-align: center; box-shadow: 0 2px 12px rgba(14,17,23,0.06); }
+.dom-icon { font-size: 24px; margin-bottom: 8px; }
+.dom-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-60); margin-bottom: 6px; }
+.dom-score { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 700; margin-bottom: 8px; }
+.dom-bar { height: 3px; background: var(--ink-10); border-radius: 100px; overflow: hidden; }
+.dom-fill { height: 100%; border-radius: 100px; transition: width 1.2s ease; }
+.d-high .dom-score { color: var(--green); }
+.d-high .dom-fill { background: var(--green); }
+.d-mid .dom-score { color: var(--gold); }
+.d-mid .dom-fill { background: var(--gold); }
+.d-low .dom-score { color: var(--red-dc); }
+.d-low .dom-fill { background: var(--red-dc); }
+
+/* === SECTION HEADING === */
+.sec-label { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.sec-label-text { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.10em; color: var(--gold); }
+.sec-label-line { flex: 1; height: 1px; background: var(--border); }
+.sec-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+.sec-sub { font-size: 13.5px; color: var(--ink-60); margin-bottom: 24px; }
+
+/* === SKILL GAP DIAGNOSIS === */
+.gap-card { border-radius: var(--r); padding: 20px 22px; margin-bottom: 14px; display: flex; gap: 14px; align-items: flex-start; border: 1px solid transparent; }
+.gap-card.strength { background: var(--green-pale); border-color: #B8DEC9; }
+.gap-card.gap { background: var(--red-pale); border-color: #F5C0C8; }
+.gap-card.watch { background: var(--amber-pale); border-color: #E8D5A8; }
+.gap-icon { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.strength .gap-icon { background: #B8DEC9; }
+.gap .gap-icon { background: #F5C0C8; }
+.watch .gap-icon { background: #E8D5A8; }
+.gap-body-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.gap-body-text { font-size: 13px; color: var(--ink-60); line-height: 1.65; }
+
+/* === SKILLS GAP TABLE === */
+.gap-table { background: white; border-radius: var(--r); border: 1px solid var(--border); overflow: hidden; margin-bottom: 32px; }
+.gap-table-row { display: flex; align-items: center; padding: 14px 20px; gap: 16px; border-bottom: 1px solid var(--border); }
+.gap-table-row:last-child { border-bottom: none; }
+.gap-table-row.header { background: var(--surface); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-60); padding: 10px 20px; }
+.gtr-domain { flex: 2; font-size: 13.5px; font-weight: 500; }
+.gtr-score { flex: 1; text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; }
+.gtr-gap { flex: 2; }
+.gtr-priority { flex: 1; text-align: center; }
+.gap-bar-sm { height: 4px; background: var(--ink-10); border-radius: 100px; margin-top: 4px; overflow: hidden; }
+.gap-bar-sm-fill { height: 100%; border-radius: 100px; }
+.priority-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+.p-high { background: var(--red-dc); }
+.p-mid { background: var(--gold); }
+.p-low { background: var(--green); }
+
+/* === DC SOLUTIONS === */
+.dc-card { background: white; border-radius: var(--r); border: 1px solid var(--border); overflow: hidden; margin-bottom: 16px; }
+.dc-header { background: var(--ink); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.dc-header-left { display: flex; align-items: center; gap: 12px; }
+.dc-hicon { width: 38px; height: 38px; background: rgba(184,136,42,0.20); border-radius: var(--rs); display: flex; align-items: center; justify-content: center; font-size: 17px; }
+.dc-htitle { font-size: 14.5px; font-weight: 600; color: white; }
+.dc-hsub { font-size: 11.5px; color: rgba(255,255,255,0.45); margin-top: 1px; }
+.pri-badge { padding: 4px 11px; border-radius: 100px; font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+.pri-1 { background: var(--red-dc); color: white; }
+.pri-2 { background: var(--gold); color: var(--ink); }
+.pri-3 { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.60); }
+
+/* Addresses gap box inside DC card */
+.dc-gap-tag { background: var(--red-pale); color: var(--red-dc); font-size: 11.5px; font-weight: 500; padding: 5px 12px; border-radius: 100px; border: 1px solid #F5C0C8; display: inline-block; margin-bottom: 12px; }
+.dc-body { padding: 18px 20px; }
+.dc-body p { font-size: 13.5px; color: var(--ink-60); line-height: 1.70; margin-bottom: 14px; }
+.skill-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip { padding: 4px 11px; border-radius: 100px; font-size: 12px; font-weight: 500; background: var(--surface); color: var(--ink-60); border: 1px solid var(--border); }
+.chip.dc-chip { background: var(--red-pale); color: var(--red-dc); border-color: #F5C0C8; }
+.chip.gap-chip { background: var(--teal-pale); color: var(--teal); border-color: #B5D8E0; }
+
+/* === LINKEDIN === */
+.li-card { background: white; border-radius: var(--r); border: 1px solid var(--border); padding: 26px; margin: 28px 0; }
+.li-header { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 16px; }
+.li-logo { width: 22px; height: 22px; background: #0A66C2; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white; font-family: sans-serif; }
+.li-post { background: var(--surface); border-radius: var(--rs); border: 1px solid var(--border); padding: 18px; font-size: 13.5px; line-height: 1.80; color: var(--ink); white-space: pre-wrap; min-height: 180px; margin-bottom: 14px; font-family: 'Inter', sans-serif; }
+.copy-btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; border-radius: 100px; background: #0A66C2; color: white; font-size: 13px; font-weight: 500; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+.copy-btn:hover { background: #0855a5; }
+.copy-btn.done { background: var(--green); }
+
+/* === FOOTER === */
+.result-footer { background: var(--ink); color: rgba(255,255,255,0.40); text-align: center; padding: 28px 24px; font-size: 12.5px; margin-top: 48px; }
+.result-footer strong { color: var(--gold-mid); }
+
+/* responsive */
+@media(max-width: 600px) {
+  .domain-grid { grid-template-columns: repeat(2, 1fr); }
+  .welcome-card { padding: 28px 22px; }
+  .nav-row { flex-direction: column; }
+  .btn-nav { width: 100%; text-align: center; }
+  .gap-table-row.header .gtr-gap, .gap-table-row .gtr-gap { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow"><div class="eyebrow-dot"></div> 2026 Career Diagnostic</div>
+  <h1>HR <em>Impact Readiness</em><br>Assessment</h1>
+  <p class="hero-sub">Are you driving business outcomes — or just supporting the business? This diagnostic reveals the gap, names it precisely, and maps a path forward.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><strong>12</strong><span>Questions</span></div>
+    <div class="hero-stat"><strong>5 Pillars</strong><span>Business-first</span></div>
+    <div class="hero-stat"><strong>~5 min</strong><span>Instant results</span></div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar-wrap" id="prog-wrap">
+  <div class="wrap" style="max-width:840px;">
+    <div class="prog-top">
+      <span class="prog-label" id="prog-label">Business Acumen</span>
+      <span class="prog-count" id="prog-count">0 / 12</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+</div>
+
+<!-- WELCOME -->
+<div id="welcome">
+  <div class="wrap">
+    <div class="welcome-card">
+      <div class="w-icon">🧭</div>
+      <h2>Where does HR end and business leadership begin?</h2>
+      <p>This isn't a typical HR knowledge test. It diagnoses the five capability gaps that determine whether you're seen as a strategic business partner — or a function that supports one.</p>
+      <div class="note-box">
+        <strong>Who is this for?</strong> Anyone working in or alongside HR — whether you're in HRBP, L&D, Talent, OD, or a people-leader role. The questions focus on <em>business impact behaviors</em>, not HR technical knowledge.
+      </div>
+      <div class="feat-list">
+        <div class="feat-item"><div class="feat-check">✓</div> Understand your current impact level across 5 critical pillars</div>
+        <div class="feat-item"><div class="feat-check">✓</div> See your precise skill gaps mapped with honest language</div>
+        <div class="feat-item"><div class="feat-check">✓</div> Get a prioritized Dale Carnegie development pathway</div>
+        <div class="feat-item"><div class="feat-check">✓</div> Generate a LinkedIn post ready to share in 60 seconds</div>
+      </div>
+      <button class="btn-start" onclick="startAssessment()">Start the Diagnostic →</button>
+      <p style="font-size:11.5px;color:var(--ink-30);text-align:center;margin-top:12px;">Free · No email required · 100% anonymous</p>
+    </div>
+  </div>
+</div>
+
+<!-- ASSESSMENT -->
+<div id="assessment">
+  <div class="wrap">
+    <div id="q-container"></div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" id="back-btn" onclick="prevSection()" style="visibility:hidden">← Back</button>
+      <button class="btn-nav btn-next" id="next-btn" onclick="nextSection()">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results">
+  <div class="results-hero">
+    <h2>Your HR Impact Readiness Results</h2>
+    <p>Based on your responses across all 5 pillars</p>
+    <div class="score-ring">
+      <span class="score-big" id="r-overall">--</span><span class="score-denom">/100</span>
+    </div>
+    <div><div class="archetype-pill" id="r-archetype">—</div></div>
+    <p class="archetype-sub" id="r-archetype-desc">—</p>
+  </div>
+
+  <div class="wrap">
+    <!-- DOMAIN CARDS -->
+    <div class="domain-grid" id="domain-grid"></div>
+
+    <!-- SKILL GAP DIAGNOSIS -->
+    <div style="padding: 8px 0 4px;">
+      <div class="sec-label"><span class="sec-label-text">Diagnosis</span><div class="sec-label-line"></div></div>
+      <div class="sec-title">Your Skill Gap Profile</div>
+      <p class="sec-sub">Where you stand, stated plainly — because ambiguity is expensive.</p>
+    </div>
+    <div id="gap-insights"></div>
+
+    <!-- GAP PRIORITY TABLE -->
+    <div class="gap-table" id="gap-table">
+      <div class="gap-table-row header">
+        <div class="gtr-domain">Pillar</div>
+        <div class="gtr-score">Score</div>
+        <div class="gtr-gap">Gap Type</div>
+        <div class="gtr-priority">Priority</div>
+      </div>
+    </div>
+
+    <!-- DC SOLUTIONS -->
+    <div style="padding: 20px 0 4px;">
+      <div class="sec-label"><span class="sec-label-text">Development Pathway</span><div class="sec-label-line"></div></div>
+      <div class="sec-title">Your Dale Carnegie Roadmap</div>
+      <p class="sec-sub">Programs matched to your specific gaps — in order of highest business impact.</p>
+    </div>
+    <div id="dc-recs"></div>
+
+    <!-- LINKEDIN -->
+    <div class="li-card">
+      <div class="li-header"><div class="li-logo">in</div> Share your results</div>
+      <div class="li-post" id="li-text"></div>
+      <button class="copy-btn" id="copy-btn" onclick="copyPost()"><span>📋</span> Copy to clipboard</button>
+    </div>
+
+    <div style="text-align:center;padding:20px 0 44px;">
+      <button class="btn-nav btn-back" onclick="retake()" style="visibility:visible">↩ Retake Assessment</button>
+    </div>
+  </div>
+
+  <div class="result-footer">
+    Powered by <strong>Dale Carnegie Thailand</strong> · Developing leaders who drive business results
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+
+const PILLARS = [
+  {
+    id: 'acumen',
+    name: 'Business Acumen',
+    icon: '📊',
+    desc: 'Can you translate strategy into people priorities — and speak in business language, not HR language?',
+    questions: [
+      {
+        text: 'I regularly connect our HR initiatives directly to measurable business KPIs — revenue, productivity, retention cost.',
+        reverse: false,
+        gap: 'Strategic translation gap: HR sees activities, not outcomes.'
+      },
+      {
+        text: 'Senior leaders consult me early in strategic planning — not just to execute decisions already made.',
+        reverse: false,
+        gap: 'Seat-at-the-table gap: HR arrives too late to shape direction.'
+      }
+    ]
+  },
+  {
+    id: 'influence',
+    name: 'Influence & Stakeholder Management',
+    icon: '🤝',
+    desc: 'Can you move people to action without using authority — and build the credibility that makes leaders listen?',
+    questions: [
+      {
+        text: 'Line leaders proactively involve me in decisions that affect people — before problems emerge.',
+        reverse: false,
+        gap: 'Trusted advisor gap: HR is consulted reactively, not proactively.'
+      },
+      {
+        text: 'I can successfully push back on leaders when I believe a people decision is strategically wrong.',
+        reverse: false,
+        gap: 'Courage-to-influence gap: agreement without conviction builds no credibility.'
+      },
+      {
+        text: 'I struggle to get consistent buy-in from line managers when implementing HR programs.',
+        reverse: true,
+        gap: 'Stakeholder alignment gap: adoption requires more than communication — it requires influence.'
+      }
+    ]
+  },
+  {
+    id: 'behavior',
+    name: 'Driving Behavior Change',
+    icon: '⚡',
+    desc: 'Can you move beyond training delivery to actual behavior shift — the difference between L&D and real impact?',
+    questions: [
+      {
+        text: 'After our training programs, we systematically track whether behavior actually changed on the job — not just satisfaction scores.',
+        reverse: false,
+        gap: 'Measurement gap: activity without accountability is a cost center.'
+      },
+      {
+        text: 'I design learning interventions that address root causes of performance gaps, not just surface-level symptoms.',
+        reverse: false,
+        gap: 'Diagnostic gap: training the wrong problem is worse than no training.'
+      }
+    ]
+  },
+  {
+    id: 'talent',
+    name: 'Talent & Performance Leverage',
+    icon: '📈',
+    desc: 'Can you link people investment to performance outcomes — and build the pipeline the business actually needs?',
+    questions: [
+      {
+        text: 'I can clearly demonstrate the ROI of our L&D or talent programs in terms business leaders care about.',
+        reverse: false,
+        gap: 'ROI articulation gap: without this, HR is a cost — not an investment.'
+      },
+      {
+        text: 'We have a functioning succession pipeline for key roles — not just a spreadsheet that nobody acts on.',
+        reverse: false,
+        gap: 'Pipeline execution gap: planning without activation is a false comfort.'
+      }
+    ]
+  },
+  {
+    id: 'future',
+    name: 'Future-Ready Workforce',
+    icon: '🔭',
+    desc: 'Are you preparing the organization for what\'s coming — or still managing the workforce of 2020?',
+    questions: [
+      {
+        text: 'We are actively reskilling our workforce for AI-augmented roles, not just reacting when disruption arrives.',
+        reverse: false,
+        gap: 'Future-proofing gap: HR that reacts to AI will be replaced by it.'
+      },
+      {
+        text: 'I find it difficult to get leadership investment in capability development for future roles that don\'t yet exist.',
+        reverse: true,
+        gap: 'Future-case-building gap: if HR can\'t argue for tomorrow, it\'s only useful today.'
+      }
+    ]
+  }
+];
+
+// DC programs from Master Product List, genuinely mapped to gap types
+const DC_SOLUTIONS = [
+  {
+    id: 'acumen',
+    program: 'Leadership Training for Results: Unleash Talent in Others',
+    type: 'Core Program',
+    icon: '♟️',
+    addresses: 'Business Acumen + Strategic Thinking',
+    desc: 'Builds the strategic mindset and business orientation HR leaders need to operate at the executive level. Participants develop the ability to connect people decisions to business outcomes and build influence at every organizational level.',
+    gap_addressed: 'Strategic translation gap / Seat-at-the-table gap',
+    skills: ['Strategic thinking', 'Managing progress toward goals', 'Accountability', 'Inspiring others', 'Results orientation'],
+    dc_competencies: ['Honesty & Integrity', 'Self-Awareness', 'Manages Progress Toward Goals', 'Fosters Teamwork']
+  },
+  {
+    id: 'influence',
+    program: 'Dale Carnegie Course: Effective Communications and Human Relations',
+    type: 'Core Program',
+    icon: '🤝',
+    addresses: 'Influence & Stakeholder Management',
+    desc: 'The foundational program for building genuine human influence. Develops the interpersonal skills, communication confidence, and relationship principles that allow HR leaders to win cooperation without authority — the core capability gap in stakeholder management.',
+    gap_addressed: 'Trusted advisor gap / Courage-to-influence gap / Stakeholder alignment gap',
+    skills: ['Winning cooperation', 'Communication confidence', 'Influence without authority', 'Interpersonal professionalism', 'Initiative'],
+    dc_competencies: ['Attitude', 'Communication', 'Interpersonal Skills', 'Initiative', 'Professionalism']
+  },
+  {
+    id: 'behavior',
+    program: 'High Impact Presentations / High Impact Presenting',
+    type: 'Core Program',
+    icon: '⚡',
+    addresses: 'Behavior Change + Executive Communication',
+    desc: 'HR professionals who can\'t present their ideas compellingly cannot drive behavior change. This program builds the ability to persuade, influence, and present insights to executive audiences — transforming how HR communicates its impact internally.',
+    gap_addressed: 'Measurement gap / Diagnostic gap / Influence at leadership level',
+    skills: ['Persuasive communication', 'Confident delivery', 'Executive presence', 'Professional credibility', 'Influencing decision-makers'],
+    dc_competencies: ['Confidence', 'Influence', 'Persuade', 'Communicate', 'Professionalism']
+  },
+  {
+    id: 'talent',
+    program: 'Leadership Training for Results: Unleash Talent in Others',
+    type: 'Core Program',
+    icon: '📈',
+    addresses: 'Talent Development & Performance',
+    desc: 'Equips HR leaders to develop others at scale — building coaching capability, performance conversations, and succession thinking into the daily management rhythm. Connects people development to measurable performance outcomes.',
+    gap_addressed: 'ROI articulation gap / Pipeline execution gap',
+    skills: ['Coaching for performance', 'Delegation', 'Succession planning orientation', 'Developing people', 'Accountability systems'],
+    dc_competencies: ['Manages Progress Toward Goals', 'Innovative', 'Accountability', 'Fosters Teamwork', 'Develops Others']
+  },
+  {
+    id: 'future',
+    program: 'Develop Your Leadership Potential: Stop Doing, Start Leading',
+    type: 'Core Program',
+    icon: '🔭',
+    addresses: 'Future-Readiness & Change Leadership',
+    desc: 'For HR professionals ready to step fully into a strategic leadership role. Builds the self-awareness, vision-setting capability, and change leadership skills to make the case for future investment — and lead through the uncertainty that comes with it.',
+    gap_addressed: 'Future-proofing gap / Future-case-building gap',
+    skills: ['Self-awareness', 'Visioning', 'Leading change', 'Inspiring conviction', 'Strategic courage'],
+    dc_competencies: ['Honesty & Integrity', 'Self-Aware', 'Positively Influences Others', 'Inspiring Vision', 'Adaptability']
+  }
+];
+
+const ARCHETYPES = [
+  { min: 85, label: 'Strategic HR Leader', desc: 'You are already operating at a high strategic level. Your focus now is on scaling your impact, building future-ready HR infrastructure, and developing the next generation of people leaders around you.' },
+  { min: 68, label: 'Emerging Business Partner', desc: 'You have strong instincts and real business alignment. The gap between where you are and strategic impact is narrower than it feels — but it requires deliberate investment in influence and communication capability.' },
+  { min: 50, label: 'Transitioning Practitioner', desc: 'You have solid foundations. The next move is a shift in orientation — from delivering HR programs to owning business outcomes. That shift is primarily a mindset and influence development challenge.' },
+  { min: 0, label: 'Operational HR', desc: 'You are delivering activities well. The opportunity is significant: building the strategic, commercial, and influence skills that transform how the business sees HR — and how you see yourself in it.' }
+];
+
+const GAP_LABELS = {
+  acumen: { high: 'Commercially oriented', mid: 'Developing business language', low: 'Activity-focused, not outcomes-focused' },
+  influence: { high: 'Trusted strategic advisor', mid: 'Building credibility', low: 'Influence gap limits impact' },
+  behavior: { high: 'Impact-measured L&D', mid: 'Activity-to-impact transition', low: 'Training without behavior change' },
+  talent: { high: 'Talent-to-performance linked', mid: 'Building the ROI case', low: 'Execution-measurement gap' },
+  future: { high: 'Proactively future-building', mid: 'Aware but under-resourced', low: 'Reactive to change, not ahead of it' }
+};
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let answers = {};
+let section = 0;
+
+// ── FUNCTIONS ─────────────────────────────────────────────────────────────────
+
+function startAssessment() {
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('assessment').classList.add('on');
+  document.getElementById('prog-wrap').classList.add('on');
+  renderSection();
+}
+
+function renderSection() {
+  const p = PILLARS[section];
+  const totalQ = PILLARS.reduce((a, b) => a + b.questions.length, 0);
+  const answered = Object.keys(answers).length;
+
+  document.getElementById('prog-label').textContent = p.name;
+  document.getElementById('prog-count').textContent = answered + ' / ' + totalQ;
+  document.getElementById('prog-fill').style.width = (answered / totalQ * 100) + '%';
+  document.getElementById('back-btn').style.visibility = section === 0 ? 'hidden' : 'visible';
+  document.getElementById('next-btn').textContent = section === PILLARS.length - 1 ? 'See My Results →' : 'Continue →';
+
+  const scale = ['Never — strongly disagree', 'Rarely — disagree', 'Sometimes — neutral', 'Often — agree', 'Always — strongly agree'];
+
+  let html = `<div class="cat-header">
+    <div class="cat-icon-box">${p.icon}</div>
+    <div>
+      <div class="cat-name">Pillar ${section + 1} of ${PILLARS.length}: ${p.name}</div>
+      <div class="cat-desc-text">${p.desc}</div>
+    </div>
+  </div>`;
+
+  p.questions.forEach((q, qi) => {
+    const key = p.id + '_' + qi;
+    const saved = answers[key];
+    html += `<div class="q-card">
+      <div class="q-tag">${p.name} · Q${qi + 1}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-scale">`;
+    scale.forEach((lbl, si) => {
+      const val = si + 1;
+      const sel = saved === val ? ' sel' : '';
+      html += `<label class="q-opt${sel}" onclick="pick('${key}', ${val}, this)">
+        <div class="q-radio"><div class="q-radio-dot"></div></div>
+        <span>${lbl}</span>
+      </label>`;
+    });
+    html += `</div><div class="scale-labels"><span>Strongly disagree</span><span>Strongly agree</span></div></div>`;
+  });
+
+  document.getElementById('q-container').innerHTML = html;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function pick(key, val, el) {
+  answers[key] = val;
+  const card = el.closest('.q-card');
+  card.querySelectorAll('.q-opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+  const totalQ = PILLARS.reduce((a, b) => a + b.questions.length, 0);
+  const answered = Object.keys(answers).length;
+  document.getElementById('prog-count').textContent = answered + ' / ' + totalQ;
+  document.getElementById('prog-fill').style.width = (answered / totalQ * 100) + '%';
+}
+
+function nextSection() {
+  const p = PILLARS[section];
+  const missing = p.questions.filter((_, qi) => answers[p.id + '_' + qi] === undefined);
+  if (missing.length) { alert('Please answer all questions in this section before continuing.'); return; }
+  if (section < PILLARS.length - 1) { section++; renderSection(); }
+  else { buildResults(); }
+}
+
+function prevSection() { if (section > 0) { section--; renderSection(); } }
+
+function calcScores() {
+  const s = {};
+  PILLARS.forEach(p => {
+    let t = 0;
+    p.questions.forEach((q, qi) => {
+      const v = answers[p.id + '_' + qi] || 3;
+      t += q.reverse ? (6 - v) : v;
+    });
+    s[p.id] = Math.round((t / (p.questions.length * 5)) * 100);
+  });
+  return s;
+}
+
+function buildResults() {
+  document.getElementById('assessment').classList.remove('on');
+  document.getElementById('prog-wrap').classList.remove('on');
+  document.getElementById('results').classList.add('on');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const scores = calcScores();
+  const overall = Math.round(Object.values(scores).reduce((a, b) => a + b, 0) / PILLARS.length);
+
+  document.getElementById('r-overall').textContent = overall;
+  const arch = ARCHETYPES.find(a => overall >= a.min);
+  document.getElementById('r-archetype').textContent = arch.label;
+  document.getElementById('r-archetype-desc').textContent = arch.desc;
+
+  // Domain grid
+  let dgHtml = '';
+  PILLARS.forEach(p => {
+    const s = scores[p.id];
+    const cls = s >= 75 ? 'd-high' : s >= 55 ? 'd-mid' : 'd-low';
+    dgHtml += `<div class="domain-card ${cls}">
+      <div class="dom-icon">${p.icon}</div>
+      <div class="dom-label">${p.name}</div>
+      <div class="dom-score">${s}</div>
+      <div class="dom-bar"><div class="dom-fill" style="width:${s}%"></div></div>
+    </div>`;
+  });
+  document.getElementById('domain-grid').innerHTML = dgHtml;
+
+  // Gap insights
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const top2 = sorted.slice(0, 2);
+  const bot2 = sorted.slice(-2).reverse();
+  const mid = sorted[2];
+
+  let insHtml = '';
+  top2.forEach(([id, sc]) => {
+    const p = PILLARS.find(x => x.id === id);
+    const lbl = GAP_LABELS[id].high;
+    insHtml += `<div class="gap-card strength">
+      <div class="gap-icon">💪</div>
+      <div>
+        <div class="gap-body-title">Strength: ${p.name} — ${sc}/100</div>
+        <div class="gap-body-text">${lbl}. This is where you already add strategic value. Articulate it confidently in your next senior conversation — and build on it to raise your credibility in weaker areas.</div>
+      </div>
+    </div>`;
+  });
+  bot2.forEach(([id, sc]) => {
+    const p = PILLARS.find(x => x.id === id);
+    const lbl = GAP_LABELS[id].low;
+    const q = PILLARS.find(x => x.id === id).questions.find(q => !q.reverse);
+    insHtml += `<div class="gap-card gap">
+      <div class="gap-icon">📌</div>
+      <div>
+        <div class="gap-body-title">Critical Gap: ${p.name} — ${sc}/100</div>
+        <div class="gap-body-text">${lbl}. This gap is costing you strategic credibility. Addressing it directly — not waiting for it to improve on its own — is the highest-return development decision you can make right now.</div>
+      </div>
+    </div>`;
+  });
+  const midP = PILLARS.find(x => x.id === mid[0]);
+  insHtml += `<div class="gap-card watch">
+    <div class="gap-icon">🚀</div>
+    <div>
+      <div class="gap-body-title">Quick Win: ${midP.name} — ${mid[1]}/100</div>
+      <div class="gap-body-text">You're close to a step change here. A focused 90-day sprint would move this from a neutral zone into a genuine strength — and increase your executive visibility faster than any of the other areas.</div>
+    </div>
+  </div>`;
+  document.getElementById('gap-insights').innerHTML = insHtml;
+
+  // Gap priority table
+  const sortedForTable = [...PILLARS].sort((a, b) => scores[a.id] - scores[b.id]);
+  let tableHtml = document.getElementById('gap-table').innerHTML;
+  sortedForTable.forEach((p, i) => {
+    const sc = scores[p.id];
+    const gtype = sc >= 75 ? GAP_LABELS[p.id].high : sc >= 55 ? GAP_LABELS[p.id].mid : GAP_LABELS[p.id].low;
+    const priClass = i < 2 ? 'p-high' : i < 4 ? 'p-mid' : 'p-low';
+    const priText = i < 2 ? 'Critical' : i < 4 ? 'Important' : 'Maintain';
+    const barColor = sc >= 75 ? 'var(--green)' : sc >= 55 ? 'var(--gold)' : 'var(--red-dc)';
+    tableHtml += `<div class="gap-table-row">
+      <div class="gtr-domain">${p.icon} ${p.name}</div>
+      <div class="gtr-score" style="color:${barColor}">${sc}</div>
+      <div class="gtr-gap">
+        <div style="font-size:12.5px;color:var(--ink-60)">${gtype}</div>
+        <div class="gap-bar-sm"><div class="gap-bar-sm-fill" style="width:${sc}%;background:${barColor}"></div></div>
+      </div>
+      <div class="gtr-priority"><span class="priority-dot ${priClass}"></span> <span style="font-size:12px;color:var(--ink-60)">${priText}</span></div>
+    </div>`;
+  });
+  document.getElementById('gap-table').innerHTML = tableHtml;
+
+  // DC recs — sorted by score gap (biggest gap first), deduplicate programs
+  const seenPrograms = new Set();
+  let recsHtml = '';
+  let priCount = 1;
+  sortedForTable.forEach((p, i) => {
+    const sol = DC_SOLUTIONS.find(s => s.id === p.id);
+    if (!sol || seenPrograms.has(sol.program)) return;
+    seenPrograms.add(sol.program);
+    const priLabel = priCount === 1 ? 'Priority 1' : priCount === 2 ? 'Priority 2' : 'Priority 3';
+    const priClass = priCount === 1 ? 'pri-1' : priCount === 2 ? 'pri-2' : 'pri-3';
+    priCount++;
+    recsHtml += `<div class="dc-card">
+      <div class="dc-header">
+        <div class="dc-header-left">
+          <div class="dc-hicon">${sol.icon}</div>
+          <div>
+            <div class="dc-htitle">${sol.program}</div>
+            <div class="dc-hsub">${sol.type} · Addresses: ${sol.addresses}</div>
+          </div>
+        </div>
+        <div class="pri-badge ${priClass}">${priLabel}</div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-gap-tag">Closes: ${sol.gap_addressed}</div>
+        <p>${sol.desc}</p>
+        <div class="skill-chips">
+          ${sol.skills.map(s => `<span class="chip gap-chip">${s}</span>`).join('')}
+          ${sol.dc_competencies.map(s => `<span class="chip dc-chip">DC: ${s}</span>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('dc-recs').innerHTML = recsHtml;
+
+  // LinkedIn post
+  const topName = PILLARS.find(x => x.id === top2[0][0])?.name;
+  const gapName = PILLARS.find(x => x.id === bot2[0][0])?.name;
+  const liText = `I just completed the HR Impact Readiness Assessment (2026 edition) — and the results were more honest than I expected.
+
+My overall impact score: ${overall}/100
+My profile: "${arch.label}"
+
+The assessment doesn't measure HR knowledge.
+It measures whether HR is actually moving business outcomes.
+
+Three things that hit differently:
+
+→ My strength: ${topName} (${top2[0][1]}/100)
+→ My critical gap: ${gapName} (${bot2[0][1]}/100)
+→ The gap between "supporting the business" and "shaping the business" is mostly an influence and communication problem — not a knowledge problem.
+
+That last one is worth sitting with.
+
+Based on the results, I'm investing in specific development this quarter — not a generic training program, but targeted capability building mapped to where the gaps actually are.
+
+If you work in HR, L&D, or a people-leader role — this 5-minute diagnostic is worth doing. Not to feel good about your score. To see clearly what it would take to operate at the next level.
+
+🔗 Take the free assessment → [link]
+
+#HRLeadership #BusinessImpact #PeopleStrategy #DaleCarnegie #StrategicHR #LeadershipDevelopment`;
+  document.getElementById('li-text').textContent = liText;
+}
+
+function copyPost() {
+  navigator.clipboard.writeText(document.getElementById('li-text').textContent).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.innerHTML = '✓ Copied!';
+    btn.classList.add('done');
+    setTimeout(() => { btn.innerHTML = '<span>📋</span> Copy to clipboard'; btn.classList.remove('done'); }, 2500);
+  });
+}
+
+function retake() {
+  answers = {}; section = 0;
+  document.getElementById('results').classList.remove('on');
+  document.getElementById('assessment').classList.add('on');
+  document.getElementById('prog-wrap').classList.add('on');
+  renderSection();
+}
+</script>
+</body>
+</html>
